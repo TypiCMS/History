@@ -16,9 +16,6 @@ class ModuleProvider extends ServiceProvider
 
     public function boot()
     {
-        // Bring in the routes
-        require __DIR__ . '/../routes.php';
-
         // Add dirs
         View::addNamespace('history', __DIR__ . '/../views/');
         $this->publishes([
@@ -38,6 +35,11 @@ class ModuleProvider extends ServiceProvider
     {
 
         $app = $this->app;
+
+        /**
+         * Register route service provider
+         */
+        $app->register('TypiCMS\Modules\History\Providers\RouteServiceProvider');
 
         $app->bind('TypiCMS\Modules\History\Repositories\HistoryInterface', function (Application $app) {
             $repository = new EloquentHistory(new History);
