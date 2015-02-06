@@ -1,20 +1,15 @@
 <?php
 namespace TypiCMS\Modules\History\Providers;
 
-use View;
 use Config;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-
-// Models
+use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\History\Models\History;
-
-// Repo
-use TypiCMS\Modules\History\Repositories\EloquentHistory;
-
-// Cache
 use TypiCMS\Modules\History\Repositories\CacheDecorator;
+use TypiCMS\Modules\History\Repositories\EloquentHistory;
 use TypiCMS\Services\Cache\LaravelCache;
+use View;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -25,10 +20,18 @@ class ModuleProvider extends ServiceProvider
         require __DIR__ . '/../routes.php';
 
         // Add dirs
-        View::addLocation(__DIR__ . '/../Views');
+        View::addNamespace('history', __DIR__ . '/../views/');
         $this->publishes([
             __DIR__ . '/../config/' => config_path('typicms/history'),
         ], 'config');
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations'),
+        ], 'migrations');
+
+        AliasLoader::getInstance()->alias(
+            'History',
+            'TypiCMS\Modules\History\Facades\Facade'
+        );
     }
 
     public function register()
