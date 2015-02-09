@@ -18,9 +18,9 @@ class ModuleProvider extends ServiceProvider
     {
         // Add dirs
         View::addNamespace('history', __DIR__ . '/../views/');
-        $this->publishes([
-            __DIR__ . '/../config/' => config_path('typicms/history'),
-        ], 'config');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/config.php', 'typicms.history'
+        );
         $this->publishes([
             __DIR__ . '/../migrations/' => base_path('/database/migrations'),
         ], 'migrations');
