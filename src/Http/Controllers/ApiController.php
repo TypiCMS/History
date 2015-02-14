@@ -1,8 +1,8 @@
 <?php
-namespace TypiCMS\Modules\History\Controllers;
+namespace TypiCMS\Modules\History\Http\Controllers;
 
 use Response;
-use TypiCMS\Controllers\BaseApiController;
+use TypiCMS\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\History\Repositories\HistoryInterface as Repository;
 
 class ApiController extends BaseApiController
