@@ -24,7 +24,7 @@ class ModuleProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'history');
 
         $this->publishes([
-            __DIR__ . '/../views' => base_path('resources/views/vendor/history'),
+            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/history'),
         ], 'views');
         $this->publishes([
             __DIR__ . '/../database' => base_path('database'),
