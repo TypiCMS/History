@@ -19,7 +19,7 @@ class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
      * @param  boolean     $all  Show published or all
      * @return Collection|NestedCollection
      */
-    public function getAll(array $with = array(), $all = false)
+    public function all(array $with = array(), $all = false)
     {
         $query = $this->make($with);
 
