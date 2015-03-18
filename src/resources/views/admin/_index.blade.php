@@ -19,24 +19,24 @@
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <input st-search="" class="form-control input-sm" placeholder="{{ 'Search' | translate }}…" type="text">
+                            <input st-search="" class="form-control input-sm" placeholder="@{{ 'Search' | translate }}…" type="text">
                         </td>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr ng-repeat="model in displayedModels">
-                        <td>{{ model.created_at | dateFromMySQL:'short' }}</td>
+                        <td>@{{ model.created_at | dateFromMySQL:'short' }}</td>
                         <td>
-                            <a ng-if="model.href" href="{{ model.href }}?locale={{ model.locale }}">{{ model.title }}</a>
-                            <span ng-if="! model.href">{{ model.title }}</span>
-                            <span ng-if="model.locale">({{ model.locale }})</span>
+                            <a ng-if="model.href" href="@{{ model.href }}?locale=@{{ model.locale }}">@{{ model.title }}</a>
+                            <span ng-if="! model.href">@{{ model.title }}</span>
+                            <span ng-if="model.locale">(@{{ model.locale }})</span>
                         </td>
-                        <td>{{ model.historable_table }}</td>
+                        <td>@{{ model.historable_table }}</td>
                         <td>
-                            <span class="fa fa-fw {{ model.icon_class }}"></span> {{ model.action }}
+                            <span class="fa fa-fw @{{ model.icon_class }}"></span> @{{ model.action }}
                         </td>
-                        <td>{{ model.user_name }}</td>
+                        <td>@{{ model.user_name }}</td>
                     </tr>
                 </tbody>
                 <tfoot>
