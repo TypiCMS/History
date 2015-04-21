@@ -1,9 +1,9 @@
 <?php
 namespace TypiCMS\Modules\History\Traits;
 
-use App;
-use Cartalyst\Sentry\Users\UserNotFoundException;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Log;
 use Sentry;
 use TypiCMS\Modules\History\Models\History;
 
@@ -11,7 +11,7 @@ trait Historable {
 
     /**
      * boot method
-     * 
+     *
      * @return void
      */
     public static function boot()
@@ -47,7 +47,7 @@ trait Historable {
 
     /**
      * Write History row
-     * 
+     *
      * @param  string $action
      * @param  string $title
      * @param  string $locale
@@ -55,7 +55,7 @@ trait Historable {
      */
     public function writeHistory($action, $title = null, $locale = null)
     {
-        $history = App::make('TypiCMS\Modules\History\Repositories\HistoryInterface');
+        $history = app('TypiCMS\Modules\History\Repositories\HistoryInterface');
         $data['historable_id']    = $this->getKey();
         $data['historable_type']  = get_class($this);
         $data['user_id']          = $this->getAuthUserId();
@@ -69,7 +69,7 @@ trait Historable {
 
     /**
      * Return icon class for each action
-     * 
+     *
      * @param  string $action
      * @return string|void
      */
@@ -79,23 +79,23 @@ trait Historable {
             case 'deleted':
                 return 'fa-trash';
                 break;
-            
+
             case 'updated':
                 return 'fa-edit';
                 break;
-            
+
             case 'created':
                 return 'fa-plus-circle';
                 break;
-            
+
             case 'set online':
                 return 'fa-toggle-on';
                 break;
-            
+
             case 'set offline':
                 return 'fa-toggle-off';
                 break;
-            
+
             default:
                 return null;
                 break;
@@ -104,7 +104,7 @@ trait Historable {
 
     /**
      * Get current user id
-     * 
+     *
      * @return int|null
      */
     private function getAuthUserId()
@@ -114,10 +114,8 @@ trait Historable {
             // Get the current active/logged in user
             $user = Sentry::getUser();
             $userId = $user->id;
-        } catch (UserNotFoundException $e) {
-            // User wasn't found, should only happen if the user was deleted
-            // when they were already logged in or had a "remember me" cookie set
-            // and they were deleted.
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
         }
         return $userId;
     }
