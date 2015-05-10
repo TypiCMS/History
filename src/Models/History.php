@@ -1,8 +1,8 @@
 <?php
 namespace TypiCMS\Modules\History\Models;
 
+use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Models\Base;
-use TypiCMS\Presenters\PresentableTrait;
 
 class History extends Base
 {
@@ -72,7 +72,7 @@ class History extends Base
 
     /**
      * Get title (overwrite Base model method)
-     * 
+     *
      * @return string|null
      */
     public function getHrefAttribute()
