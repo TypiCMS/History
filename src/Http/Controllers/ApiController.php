@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\History\Http\Controllers;
 
 use Response;
-use TypiCMS\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\History\Repositories\HistoryInterface as Repository;
 
 class ApiController extends BaseApiController
@@ -14,7 +14,7 @@ class ApiController extends BaseApiController
 
     /**
      * Get models
-     * 
+     *
      * @return Response
      */
     public function index()

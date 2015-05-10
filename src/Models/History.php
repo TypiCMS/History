@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\History\Models;
 
 use Laracasts\Presenter\PresentableTrait;
-use TypiCMS\Models\Base;
+use TypiCMS\Modules\Core\Models\Base;
 
 class History extends Base
 {

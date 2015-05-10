@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\History\Repositories;
 
-use TypiCMS\Repositories\RepositoryInterface;
+use TypiCMS\Modules\Core\Repositories\RepositoryInterface;
 
 interface HistoryInterface extends RepositoryInterface
 {

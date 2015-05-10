@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\History\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
 class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
 {
