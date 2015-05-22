@@ -3,8 +3,8 @@ namespace TypiCMS\Modules\History\Traits;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Log;
-use Sentry;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use TypiCMS\Modules\History\Models\History;
 
 trait Historable {
@@ -112,7 +112,7 @@ trait Historable {
         $userId = null;
         try {
             // Get the current active/logged in user
-            $user = Sentry::getUser();
+            $user = Auth::user();
             $userId = $user->id;
         } catch (Exception $e) {
             Log::info($e->getMessage());
