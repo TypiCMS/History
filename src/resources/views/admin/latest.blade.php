@@ -3,7 +3,7 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2 class="panel-title" translate>Latest changes</h2>
+            <h2 class="panel-title">@lang('history::global.Latest changes')</h2>
         </div>
 
         <div class="table-responsive">
@@ -11,11 +11,11 @@
             <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
                 <thead>
                     <tr>
-                        <th class="created_at" translate>Date</th>
-                        <th class="title" translate>Title</th>
-                        <th class="historable_table" translate>Module</th>
-                        <th class="action" translate>Action</th>
-                        <th class="user_name" translate>User</th>
+                        <th class="created_at">Date</th>
+                        <th class="title">Title</th>
+                        <th class="historable_table">Module</th>
+                        <th class="action">Action</th>
+                        <th class="user_name">User</th>
                     </tr>
                 </thead>
 

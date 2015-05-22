@@ -3,7 +3,7 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2 class="panel-title" translate>Latest changes</h2>
+            <h2 class="panel-title">@lang('history::global.Latest changes')</h2>
         </div>
 
         <div class="table-responsive">
@@ -11,15 +11,15 @@
             <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
                 <thead>
                     <tr>
-                        <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort" translate>Date</th>
-                        <th st-sort="title" class="title st-sort" translate>Title</th>
-                        <th st-sort="historable_table" class="historable_table st-sort" translate>Module</th>
-                        <th st-sort="action" class="action st-sort" translate>Action</th>
-                        <th st-sort="user_name" class="user_name st-sort" translate>User</th>
+                        <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort">Date</th>
+                        <th st-sort="title" class="title st-sort">Title</th>
+                        <th st-sort="historable_table" class="historable_table st-sort">Module</th>
+                        <th st-sort="action" class="action st-sort">Action</th>
+                        <th st-sort="user_name" class="user_name st-sort">User</th>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <input st-search="" class="form-control input-sm" placeholder="@{{ 'Search' | translate }}…" type="text">
+                            <input st-search="" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
                         </td>
                     </tr>
                 </thead>

@@ -22,6 +22,7 @@ class ModuleProvider extends ServiceProvider
         );
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'history');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'history');
 
         $this->publishes([
             __DIR__ . '/../resources/views' => base_path('resources/views/vendor/history'),
