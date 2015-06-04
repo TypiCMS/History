@@ -1,15 +1,13 @@
 <?php
 namespace TypiCMS\Modules\History\Providers;
 
-use Config;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\History\Models\History;
 use TypiCMS\Modules\History\Repositories\CacheDecorator;
 use TypiCMS\Modules\History\Repositories\EloquentHistory;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
-use View;
 
 class ModuleProvider extends ServiceProvider
 {
