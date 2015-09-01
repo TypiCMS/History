@@ -58,10 +58,10 @@ trait Historable {
         $history = app('TypiCMS\Modules\History\Repositories\HistoryInterface');
         $data['historable_id']    = $this->getKey();
         $data['historable_type']  = get_class($this);
-        $data['user_id']          = $this->getAuthUserId();
+        $data['user_id']          = $this->getUserId();
         $data['title']            = $title;
         $data['locale']           = $locale;
-        $data['icon_class']       = $this->historyIconClass($action);
+        $data['icon_class']       = $this->iconClass($action);
         $data['historable_table'] = $this->getTable();
         $data['action']           = $action;
         $history->create($data);
@@ -73,7 +73,7 @@ trait Historable {
      * @param  string $action
      * @return string|void
      */
-    private function historyIconClass($action = null)
+    private function iconClass($action = null)
     {
         switch ($action) {
             case 'deleted':
@@ -107,17 +107,12 @@ trait Historable {
      *
      * @return int|null
      */
-    private function getAuthUserId()
+    private function getUserId()
     {
-        $userId = null;
-        try {
-            // Get the current active/logged in user
-            $user = Auth::user();
-            $userId = $user->id;
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
+        if ($user = Auth::user()) {
+            return $user->id;
         }
-        return $userId;
+        return null;
     }
 
     /**
