@@ -1,4 +1,5 @@
 <?php
-return array(
+
+return [
     'Latest changes' => 'Activité récente',
-);
+];

@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\History\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
@@ -13,13 +14,14 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * Get models
+     * Get models.
      *
      * @return \Illuminate\Support\Facades\Response
      */
     public function index()
     {
         $models = $this->repository->latest(25, ['historable', 'user'], true);
+
         return response()->json($models, 200);
     }
 
@@ -37,7 +39,8 @@ class ApiController extends BaseApiController
      * Update the specified resource in storage.
      *
      * @param  $model
-     * @return boolean
+     *
+     * @return bool
      */
     public function update($model)
     {

@@ -1,16 +1,15 @@
 <?php
+
 namespace TypiCMS\Modules\History\Traits;
 
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use TypiCMS\Modules\History\Models\History;
 
-trait Historable {
-
+trait Historable
+{
     /**
-     * boot method
+     * boot method.
      *
      * @return void
      */
@@ -19,13 +18,13 @@ trait Historable {
         parent::boot();
 
         static::created(function (Model $model) {
-            if (! $model->owner) { // don't write history for each translation
+            if (!$model->owner) { // don't write history for each translation
                 $model->writeHistory('created', $model->present()->title);
             }
         });
         static::updated(function (Model $model) {
             $action = 'updated';
-            if (! $model->owner) { // if model has no owner, $model is not a translation
+            if (!$model->owner) { // if model has no owner, $model is not a translation
                 $model->writeHistory($action, $model->present()->title);
             } else { // if model has owner, $model is a translation
                 // When owner is dirty, history will be written for owner model
@@ -35,7 +34,7 @@ trait Historable {
                 // When item is set online or offline,
                 // getDirty returns only two columns : updated_at and status
                 if (count($model->getDirty()) == 2 && $model->isDirty('status')) {
-                    $action = $model->status ? 'set online' : 'set offline' ;
+                    $action = $model->status ? 'set online' : 'set offline';
                 }
                 $model->owner->writeHistory($action, $model->owner->present()->title, $model->locale);
             }
@@ -46,31 +45,33 @@ trait Historable {
     }
 
     /**
-     * Write History row
+     * Write History row.
      *
-     * @param  string $action
-     * @param  string $title
-     * @param  string $locale
+     * @param string $action
+     * @param string $title
+     * @param string $locale
+     *
      * @return void
      */
     public function writeHistory($action, $title = null, $locale = null)
     {
         $history = app('TypiCMS\Modules\History\Repositories\HistoryInterface');
-        $data['historable_id']    = $this->getKey();
-        $data['historable_type']  = get_class($this);
-        $data['user_id']          = $this->getUserId();
-        $data['title']            = $title;
-        $data['locale']           = $locale;
-        $data['icon_class']       = $this->iconClass($action);
+        $data['historable_id'] = $this->getKey();
+        $data['historable_type'] = get_class($this);
+        $data['user_id'] = $this->getUserId();
+        $data['title'] = $title;
+        $data['locale'] = $locale;
+        $data['icon_class'] = $this->iconClass($action);
         $data['historable_table'] = $this->getTable();
-        $data['action']           = $action;
+        $data['action'] = $action;
         $history->create($data);
     }
 
     /**
-     * Return icon class for each action
+     * Return icon class for each action.
      *
-     * @param  string $action
+     * @param string $action
+     *
      * @return string|void
      */
     private function iconClass($action = null)
@@ -97,13 +98,13 @@ trait Historable {
                 break;
 
             default:
-                return null;
+                return;
                 break;
         }
     }
 
     /**
-     * Get current user id
+     * Get current user id.
      *
      * @return int|null
      */
@@ -112,11 +113,12 @@ trait Historable {
         if ($user = Auth::user()) {
             return $user->id;
         }
-        return null;
+
+        return;
     }
 
     /**
-     * Model has history
+     * Model has history.
      */
     public function history()
     {
