@@ -14,9 +14,9 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * Get models.
+     * List resources.
      *
-     * @return \Illuminate\Support\Facades\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -28,11 +28,17 @@ class ApiController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @return Model|false
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store()
     {
-        return $this->repository->create(Input::all());
+        $model = $this->repository->create(Input::all());
+        $error = $model ? false : true;
+
+        return response()->json([
+            'error' => $error,
+            'model' => $model,
+        ], 200);
     }
 
     /**
@@ -40,10 +46,14 @@ class ApiController extends BaseApiController
      *
      * @param  $model
      *
-     * @return bool
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($model)
     {
-        return $this->repository->update(Input::all());
+        $error = $this->repository->update(Input::all()) ? false : true;
+
+        return response()->json([
+            'error' => $error,
+        ], 200);
     }
 }
