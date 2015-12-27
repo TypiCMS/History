@@ -50,7 +50,7 @@ class History extends Base
     /**
      * Get user name.
      *
-     * @return string
+     * @return string\null
      */
     public function getUserNameAttribute()
     {

@@ -72,7 +72,7 @@ trait Historable
      *
      * @param string $action
      *
-     * @return string|void
+     * @return string|null
      */
     private function iconClass($action = null)
     {
