@@ -22,7 +22,7 @@ class ApiController extends BaseApiController
     {
         $models = $this->repository->latest(25, ['historable', 'user'], true);
 
-        return response()->json($models, 200);
+        return response()->json($models);
     }
 
     /**
@@ -38,22 +38,6 @@ class ApiController extends BaseApiController
         return response()->json([
             'error' => $error,
             'model' => $model,
-        ], 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  $model
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update($model)
-    {
-        $error = $this->repository->update(Request::all()) ? false : true;
-
-        return response()->json([
-            'error' => $error,
-        ], 200);
+        ]);
     }
 }
