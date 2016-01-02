@@ -17,20 +17,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'TypiCMS\Modules\History\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-
-        $router->model('history', 'TypiCMS\Modules\History\Models\History');
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -43,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * API routes
              */
-            $router->resource('api/history', 'ApiController');
+            $router->get('api/history', ['as' => 'api.history.index', 'uses' => 'ApiController@index']);
         });
     }
 }
