@@ -49,7 +49,7 @@ class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
     /**
      * Clear history.
      *
-     * @return boolean
+     * @return bool
      */
     public function empty()
     {
