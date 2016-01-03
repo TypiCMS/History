@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
              * API routes
              */
             $router->get('api/history', ['as' => 'api.history.index', 'uses' => 'ApiController@index']);
+            $router->delete('api/history', ['as' => 'api.history.destroy', 'uses' => 'ApiController@destroy']);
         });
     }
 }

@@ -45,4 +45,14 @@ class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
 
         return $query->order()->take($number)->get();
     }
+
+    /**
+     * Clear history.
+     *
+     * @return boolean
+     */
+    public function empty()
+    {
+        return $this->make()->delete();
+    }
 }

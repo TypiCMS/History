@@ -40,4 +40,20 @@ class ApiController extends BaseApiController
             'model' => $model,
         ]);
     }
+
+    /**
+     * Clear history.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy()
+    {
+        $model = $this->repository->empty();
+        $error = $model ? false : true;
+
+        return response()->json([
+            'error' => $error,
+            'model' => $model,
+        ]);
+    }
 }
