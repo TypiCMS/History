@@ -12,4 +12,14 @@ class CacheDecorator extends CacheAbstractDecorator implements HistoryInterface
         $this->repo = $repo;
         $this->cache = $cache;
     }
+
+    /**
+     * Clear history.
+     *
+     * @return boolean
+     */
+    public function empty()
+    {
+        return $this->repo->empty();
+    }
 }
