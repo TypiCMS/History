@@ -9,7 +9,7 @@ interface HistoryInterface extends RepositoryInterface
     /**
      * Clear history.
      *
-     * @return boolean
+     * @return bool
      */
     public function empty();
 }
