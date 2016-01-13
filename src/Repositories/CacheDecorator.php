@@ -18,8 +18,8 @@ class CacheDecorator extends CacheAbstractDecorator implements HistoryInterface
      *
      * @return bool
      */
-    public function empty()
+    public function clear()
     {
-        return $this->repo->empty();
+        return $this->repo->clear();
     }
 }

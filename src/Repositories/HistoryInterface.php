@@ -11,5 +11,5 @@ interface HistoryInterface extends RepositoryInterface
      *
      * @return bool
      */
-    public function empty();
+    public function clear();
 }

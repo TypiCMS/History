@@ -51,7 +51,7 @@ class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
      *
      * @return bool
      */
-    public function empty()
+    public function clear()
     {
         return $this->make()->delete();
     }
