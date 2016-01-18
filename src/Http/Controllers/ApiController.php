@@ -48,12 +48,10 @@ class ApiController extends BaseApiController
      */
     public function destroy()
     {
-        $model = $this->repository->clear();
-        $error = $model ? false : true;
+        $cleared = $this->repository->clear();
 
         return response()->json([
-            'error' => $error,
-            'model' => $model,
+            'error' => (bool) !$cleared,
         ]);
     }
 }
