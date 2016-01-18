@@ -22,6 +22,7 @@ class CacheDecorator extends CacheAbstractDecorator implements HistoryInterface
     {
         $this->cache->flush();
         $this->cache->flush('dashboard');
+
         return $this->repo->clear();
     }
 }
