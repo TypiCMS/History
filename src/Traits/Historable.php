@@ -113,8 +113,6 @@ trait Historable
         if ($user = Auth::user()) {
             return $user->id;
         }
-
-        return;
     }
 
     /**
