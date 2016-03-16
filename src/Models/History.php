@@ -57,8 +57,6 @@ class History extends Base
         if ($this->user) {
             return $this->user->first_name.' '.$this->user->last_name;
         }
-
-        return;
     }
 
     /**
@@ -81,7 +79,5 @@ class History extends Base
         if ($this->historable) {
             return $this->historable->editUrl();
         }
-
-        return;
     }
 }
