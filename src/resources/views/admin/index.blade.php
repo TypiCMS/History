@@ -1,3 +1,9 @@
+@extends('core::admin.master')
+
+@section('title', trans($module.'::global.name'))
+
+@section('main')
+
 <div ng-app="typicms" ng-cloak ng-controller="ListController">
 
     <div class="panel panel-default">
@@ -51,3 +57,5 @@
     </div>
 
 </div>
+
+@endsection
