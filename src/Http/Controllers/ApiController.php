@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\History\Http\Controllers;
 
 use Response;
@@ -13,13 +14,14 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * Get models
+     * Get models.
      *
      * @return Response
      */
     public function index()
     {
         $models = $this->repository->latest(25, ['historable', 'user'], true);
+
         return Response::json($models, 200);
     }
 }
