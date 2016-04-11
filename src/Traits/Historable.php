@@ -109,15 +109,9 @@ trait Historable {
      */
     private function getAuthUserId()
     {
-        $userId = null;
-        try {
-            // Get the current active/logged in user
-            $user = Sentry::getUser();
-            $userId = $user->id;
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
+        if ($user = Sentry::getUser()) {
+            return $user->id;
         }
-        return $userId;
     }
 
     /**
