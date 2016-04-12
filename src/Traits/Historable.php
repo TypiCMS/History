@@ -39,7 +39,7 @@ trait Historable
                 $model->owner->writeHistory($action, $model->owner->present()->title, $model->locale);
             }
         });
-        static::deleting(function (Model $model) {
+        static::deleted(function (Model $model) {
             $model->writeHistory('deleted', $model->present()->title);
         });
     }
