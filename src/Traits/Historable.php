@@ -13,10 +13,8 @@ trait Historable
      *
      * @return void
      */
-    public static function boot()
+    public static function bootHistorable()
     {
-        parent::boot();
-
         static::created(function (Model $model) {
             if (!$model->owner) { // don't write history for each translation
                 $model->writeHistory('created', $model->present()->title);
