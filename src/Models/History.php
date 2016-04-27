@@ -16,6 +16,11 @@ class History extends Base
 
     protected $appends = ['user_name', 'href'];
 
+    protected $casts = [
+        'old' => 'object',
+        'new' => 'object'
+    ];
+
     /**
      * lists.
      */

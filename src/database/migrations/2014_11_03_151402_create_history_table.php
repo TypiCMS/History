@@ -23,6 +23,8 @@ class CreateHistoryTable extends Migration
             $table->string('locale')->nullable();
             $table->string('historable_table');
             $table->string('action');
+            $table->json('old');
+            $table->json('new');
             $table->timestamps();
         });
     }
