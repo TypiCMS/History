@@ -18,7 +18,7 @@ class History extends Base
 
     protected $casts = [
         'old' => 'object',
-        'new' => 'object'
+        'new' => 'object',
     ];
 
     /**
