@@ -23,7 +23,7 @@ trait Historable
             $new = [];
             $old = [];
             foreach ($model->attributes as $key => $value) {
-                if (in_array($key, $model->translatable)) {
+                if ($model->translatable and in_array($key, $model->translatable)) {
                     $values = (array) json_decode($value);
                     $originalValues = (array) json_decode($model->original[$key]);
                     foreach ($values as $locale => $newItem) {
