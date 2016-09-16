@@ -3,7 +3,6 @@
 namespace TypiCMS\Modules\History\Providers;
 
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\History\Models\History;
 use TypiCMS\Modules\History\Repositories\EloquentHistory;
