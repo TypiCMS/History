@@ -12,7 +12,7 @@ class History extends Base
     protected $table = 'history';
     protected $presenter = 'TypiCMS\Modules\History\Presenters\ModulePresenter';
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'exit'];
 
     protected $appends = ['user_name', 'href'];
 

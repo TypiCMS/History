@@ -4,7 +4,7 @@ namespace TypiCMS\Modules\History\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
-use TypiCMS\Modules\History\Repositories\HistoryInterface as Repository;
+use TypiCMS\Modules\History\Repositories\EloquentHistory as Repository;
 
 class ApiController extends BaseApiController
 {

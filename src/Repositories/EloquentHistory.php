@@ -2,15 +2,13 @@
 
 namespace TypiCMS\Modules\History\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\History\Models\History;
 
-class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
+class EloquentHistory extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'history';
+
+    protected $model = History::class;
 
     /**
      * Get all models.

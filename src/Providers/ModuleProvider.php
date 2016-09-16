@@ -5,9 +5,7 @@ namespace TypiCMS\Modules\History\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\History\Models\History;
-use TypiCMS\Modules\History\Repositories\CacheDecorator;
 use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
 class ModuleProvider extends ServiceProvider
@@ -43,14 +41,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register('TypiCMS\Modules\History\Providers\RouteServiceProvider');
 
-        $app->bind('TypiCMS\Modules\History\Repositories\HistoryInterface', function (Application $app) {
-            $repository = new EloquentHistory(new History());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], ['history'], 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('History', EloquentHistory::class);
     }
 }
