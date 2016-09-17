@@ -59,7 +59,6 @@ trait Historable
      */
     public function writeHistory($action, $title = null, array $old = [], array $new = [])
     {
-        $history = app('TypiCMS\Modules\History\Repositories\HistoryInterface');
         $data['historable_id'] = $this->getKey();
         $data['historable_type'] = get_class($this);
         $data['user_id'] = auth()->id();
@@ -69,7 +68,7 @@ trait Historable
         $data['action'] = $action;
         $data['old'] = $old;
         $data['new'] = $new;
-        $history->create($data);
+        History::create($data);
     }
 
     /**
@@ -113,6 +112,6 @@ trait Historable
      */
     public function history()
     {
-        return $this->morphMany('TypiCMS\Modules\History\Models\History', 'historable');
+        return $this->morphMany(History::class, 'historable');
     }
 }
