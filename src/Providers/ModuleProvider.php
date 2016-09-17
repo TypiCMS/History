@@ -28,7 +28,7 @@ class ModuleProvider extends ServiceProvider
 
         AliasLoader::getInstance()->alias(
             'History',
-            'TypiCMS\Modules\History\Facades\Facade'
+            'TypiCMS\Modules\Slides\Facades\History'
         );
     }
 
