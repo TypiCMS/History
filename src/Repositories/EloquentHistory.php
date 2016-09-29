@@ -2,7 +2,7 @@
 
 namespace TypiCMS\Modules\History\Repositories;
 
-use TypiCMS\Modules\Core\EloquentRepository;
+use TypiCMS\Modules\Core\Repositories\EloquentRepository;
 use TypiCMS\Modules\History\Models\History;
 
 class EloquentHistory extends EloquentRepository

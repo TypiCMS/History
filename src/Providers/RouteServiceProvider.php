@@ -25,11 +25,14 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         Route::group(['namespace' => $this->namespace], function (Router $router) {
+
             /*
              * API routes
              */
-            $router->get('api/history', 'ApiController@index')->name('api::index-history');
-            $router->delete('api/history', 'ApiController@destroy')->name('api::destroy-history');
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+                $router->get('history', 'ApiController@index')->name('api::index-history');
+                $router->delete('history', 'ApiController@destroy')->name('api::destroy-history');
+            });
         });
     }
 }
