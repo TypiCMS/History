@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * API routes
              */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
                 $router->get('history', 'ApiController@index')->name('api::index-history');
                 $router->delete('history', 'ApiController@destroy')->name('api::destroy-history');
             });
