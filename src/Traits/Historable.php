@@ -27,7 +27,7 @@ trait Historable
                     $values = (array) json_decode($value);
                     $originalValues = (array) json_decode($model->original[$key]);
                     foreach ($values as $locale => $newItem) {
-                        if ($newItem !== $originalValues[$locale]) {
+                        if (isset($originalValues[$locale]) && $newItem !== $originalValues[$locale]) {
                             $new[$key][$locale] = $newItem;
                             $old[$key][$locale] = $originalValues[$locale];
                         }
