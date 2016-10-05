@@ -21,7 +21,7 @@ class EloquentHistory extends EloquentRepository
      */
     public function all(array $with = [], $all = false)
     {
-        $query = $this->make($with);
+        $query = $this->with($with);
 
         // Query ORDER BY
         $query->order();
@@ -40,7 +40,7 @@ class EloquentHistory extends EloquentRepository
      */
     public function latest($number = 10, array $with = [])
     {
-        $query = $this->make($with);
+        $query = $this->with($with);
 
         return $query->order()->take($number)->get();
     }
@@ -52,6 +52,6 @@ class EloquentHistory extends EloquentRepository
      */
     public function clear()
     {
-        return $this->make()->delete();
+        return $this->getQuery()->delete();
     }
 }
