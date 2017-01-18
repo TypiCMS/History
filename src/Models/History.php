@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\History\Models;
 
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Users\Models\User;
 
 class History extends Base
 {
@@ -40,7 +41,7 @@ class History extends Base
      */
     public function user()
     {
-        return $this->belongsTo('TypiCMS\Modules\Users\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
