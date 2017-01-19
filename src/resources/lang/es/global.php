@@ -2,5 +2,5 @@
 
 return [
     'Latest changes' => 'Últimos cambios',
-    'Clear'          => 'Limpiar historial',
+    'Clear' => 'Limpiar historial',
 ];
