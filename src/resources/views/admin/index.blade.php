@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <input st-search="" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
+                            <input st-search="" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                         </td>
                     </tr>
                 </thead>

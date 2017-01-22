@@ -93,11 +93,11 @@ trait Historable
                 return 'fa-plus-circle';
                 break;
 
-            case 'set online':
+            case 'published':
                 return 'fa-toggle-on';
                 break;
 
-            case 'set offline':
+            case 'unpublished':
                 return 'fa-toggle-off';
                 break;
 
