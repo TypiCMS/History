@@ -17,11 +17,11 @@
             <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
                 <thead>
                     <tr>
-                        <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort">Date</th>
-                        <th st-sort="title" class="title st-sort">Title</th>
-                        <th st-sort="historable_table" class="historable_table st-sort">Module</th>
-                        <th st-sort="action" class="action st-sort">Action</th>
-                        <th st-sort="user_name" class="user_name st-sort">User</th>
+                        <th st-sort="created_at" st-sort-default="reverse" class="created_at st-sort">@lang('Date')</th>
+                        <th st-sort="title" class="title st-sort">@lang('Title')</th>
+                        <th st-sort="historable_table" class="historable_table st-sort">@lang('Module')</th>
+                        <th st-sort="action" class="action st-sort">@lang('Action')</th>
+                        <th st-sort="user_name" class="user_name st-sort">@lang('User')</th>
                     </tr>
                     <tr>
                         <td colspan="5">
