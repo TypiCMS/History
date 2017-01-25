@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\History\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use TypiCMS\Modules\History\Facades\History as HistoryFacade;
 use TypiCMS\Modules\History\Models\History;
 use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
@@ -25,10 +26,7 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../database' => base_path('database'),
         ], 'migrations');
 
-        AliasLoader::getInstance()->alias(
-            'History',
-            'TypiCMS\Modules\History\Facades\History'
-        );
+        AliasLoader::getInstance()->alias('History', HistoryFacade::class);
     }
 
     public function register()
@@ -38,7 +36,7 @@ class ModuleProvider extends ServiceProvider
         /*
          * Register route service provider
          */
-        $app->register('TypiCMS\Modules\History\Providers\RouteServiceProvider');
+        $app->register(RouteServiceProvider::class);
 
         $app->bind('History', EloquentHistory::class);
     }
