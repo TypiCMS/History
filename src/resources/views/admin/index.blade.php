@@ -32,7 +32,7 @@
 
                 <tbody>
                     <tr ng-repeat="model in displayedModels">
-                        <td>@{{ model.created_at | dateFromMySQL:'short' }}</td>
+                        <td>@{{ model.created_at | dateFromMySQL:'dd/MM/yyyy HH:mm' }}</td>
                         <td>
                             <a ng-if="model.href" href="@{{ model.href }}?locale=@{{ model.locale }}">@{{ model.title }}</a>
                             <span ng-if="! model.href">@{{ model.title }}</span>
