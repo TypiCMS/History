@@ -12,25 +12,6 @@ class EloquentHistory extends EloquentRepository
     protected $model = History::class;
 
     /**
-     * Get all models.
-     *
-     * @param array $with Eager load related models
-     * @param bool  $all  Show published or all
-     *
-     * @return Collection|NestedCollection
-     */
-    public function all(array $with = [], $all = false)
-    {
-        $query = $this->with($with);
-
-        // Query ORDER BY
-        $query->order();
-
-        // Get
-        return $query->get();
-    }
-
-    /**
      * Get latest models.
      *
      * @param int   $number number of items to take
@@ -38,11 +19,15 @@ class EloquentHistory extends EloquentRepository
      *
      * @return Collection
      */
-    public function latest($number = 10, array $with = [])
+    public function latest($number = 10)
     {
-        $query = $this->with($with);
-
-        return $query->order()->take($number)->get();
+        return $this->executeCallback(get_called_class(), __FUNCTION__, func_get_args(), function () use ($number) {
+            return $this->prepareQuery($this->createModel())
+                ->order()
+                ->with(['user', 'historable'])
+                ->take($number)
+                ->get();
+        });
     }
 
     /**
@@ -52,6 +37,8 @@ class EloquentHistory extends EloquentRepository
      */
     public function clear()
     {
-        return $this->getQuery()->delete();
+        $deleted = $this->getQuery()->delete();
+        $this->forgetCache();
+        return $deleted;
     }
 }
