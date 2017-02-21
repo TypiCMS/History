@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\History\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use TypiCMS\Modules\History\Models\History;
+use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
 trait Historable
 {
@@ -59,6 +60,12 @@ trait Historable
      */
     public function writeHistory($action, $title = null, array $old = [], array $new = [])
     {
+        $dirty = $this->getDirty();
+        unset($dirty['updated_at']);
+        unset($dirty['remember_token']);
+        if (!count($dirty)) {
+            return;
+        }
         $data['historable_id'] = $this->getKey();
         $data['historable_type'] = get_class($this);
         $data['user_id'] = auth()->id();
@@ -68,7 +75,7 @@ trait Historable
         $data['action'] = $action;
         $data['old'] = $old;
         $data['new'] = $new;
-        History::create($data);
+        (new EloquentHistory)->create($data);
     }
 
     /**
