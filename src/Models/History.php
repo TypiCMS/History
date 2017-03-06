@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\History\Models;
 
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\History\Presenters\ModulePresenter;
 use TypiCMS\Modules\Users\Models\User;
 
 class History extends Base
@@ -11,7 +12,7 @@ class History extends Base
     use PresentableTrait;
 
     protected $table = 'history';
-    protected $presenter = 'TypiCMS\Modules\History\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
     protected $guarded = ['id', 'exit'];
 
