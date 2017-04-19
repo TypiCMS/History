@@ -30,8 +30,8 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('history', 'AdminController@index')->name('admin::index-history');
-                $router->delete('history', 'AdminController@destroy')->name('admin::destroy-history');
+                $router->get('history', 'AdminController@index')->name('admin::index-history')->middleware('can:see-history');
+                $router->delete('history', 'AdminController@destroy')->name('admin::destroy-history')->middleware('can:clear-history');
             });
         });
     }

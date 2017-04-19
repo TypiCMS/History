@@ -4,7 +4,7 @@
 
         <div class="panel-heading">
             <h2 class="panel-title">@lang('history::global.Latest changes')</h2>
-            @can('destroy-history')
+            @can('clear-history')
             <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('history::global.Clear')</button>
             @endcan
         </div>
