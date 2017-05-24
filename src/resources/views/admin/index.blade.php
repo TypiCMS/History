@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div ng-app="typicms" ng-cloak ng-controller="ListController">
+<div ng-cloak ng-controller="ListController">
 
     <div class="panel panel-default">
 
