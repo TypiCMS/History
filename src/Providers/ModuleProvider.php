@@ -17,7 +17,6 @@ class ModuleProvider extends ServiceProvider
         );
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'history');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'history');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([

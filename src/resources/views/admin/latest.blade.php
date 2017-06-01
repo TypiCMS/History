@@ -3,9 +3,9 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2 class="panel-title">@lang('history::global.Latest changes')</h2>
-            @can('clear-history')
-            <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('history::global.Clear')</button>
+            <h2 class="panel-title">@lang('Latest changes')</h2>
+            @can ('clear-history')
+            <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('Clear')</button>
             @endcan
         </div>
 

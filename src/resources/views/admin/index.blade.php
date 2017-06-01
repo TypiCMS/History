@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __($module.'::global.name'))
+@section('title', __('History'))
 
 @section('content')
 
@@ -9,7 +9,7 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2 class="panel-title">@lang('history::global.Latest changes')</h2>
+            <h2 class="panel-title">@lang('Latest changes')</h2>
         </div>
 
         <div class="table-responsive">
@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <input st-search="" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                            <input st-search="" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                         </td>
                     </tr>
                 </thead>
