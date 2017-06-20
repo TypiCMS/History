@@ -15,9 +15,11 @@ trait Historable
      */
     public static function bootHistorable()
     {
+
         static::created(function (Model $model) {
             $model->writeHistory('created', $model->present()->title, [], $model->toArray());
         });
+
         static::updated(function (Model $model) {
             $action = 'updated';
 
@@ -44,9 +46,11 @@ trait Historable
 
             $model->writeHistory($action, $model->present()->title, $old, $new);
         });
+
         static::deleted(function (Model $model) {
             $model->writeHistory('deleted', $model->present()->title);
         });
+
     }
 
     /**
