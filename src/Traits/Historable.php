@@ -35,7 +35,7 @@ trait Historable
                     }
                 } else {
                     $originalValue = $model->original[$key];
-                    if ($value !== $originalValue) {
+                    if ($value != $originalValue) {
                         $new[$key] = $value;
                         $old[$key] = $originalValue;
                     }
