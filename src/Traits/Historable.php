@@ -16,7 +16,7 @@ trait Historable
     public static function bootHistorable()
     {
         static::created(function (Model $model) {
-            $model->writeHistory('created', $model->present()->title);
+            $model->writeHistory('created', $model->present()->title, [], $model->toArray());
         });
         static::updated(function (Model $model) {
             $action = 'updated';
@@ -60,12 +60,6 @@ trait Historable
      */
     public function writeHistory($action, $title = null, array $old = [], array $new = [])
     {
-        $dirty = $this->getDirty();
-        unset($dirty['updated_at']);
-        unset($dirty['remember_token']);
-        if (!count($dirty)) {
-            return;
-        }
         $data['historable_id'] = $this->getKey();
         $data['historable_type'] = get_class($this);
         $data['user_id'] = auth()->id();
