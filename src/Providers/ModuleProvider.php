@@ -3,11 +3,9 @@
 namespace TypiCMS\Modules\History\Providers;
 
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
+use TypiCMS\Modules\History\Facades\History as HistoryFacade;
 use TypiCMS\Modules\History\Models\History;
-use TypiCMS\Modules\History\Repositories\CacheDecorator;
 use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
 class ModuleProvider extends ServiceProvider
@@ -19,19 +17,13 @@ class ModuleProvider extends ServiceProvider
         );
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'history');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'history');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/history'),
         ], 'views');
-        $this->publishes([
-            __DIR__.'/../database' => base_path('database'),
-        ], 'migrations');
 
-        AliasLoader::getInstance()->alias(
-            'History',
-            'TypiCMS\Modules\History\Facades\Facade'
-        );
+        AliasLoader::getInstance()->alias('History', HistoryFacade::class);
     }
 
     public function register()
@@ -41,16 +33,8 @@ class ModuleProvider extends ServiceProvider
         /*
          * Register route service provider
          */
-        $app->register('TypiCMS\Modules\History\Providers\RouteServiceProvider');
+        $app->register(RouteServiceProvider::class);
 
-        $app->bind('TypiCMS\Modules\History\Repositories\HistoryInterface', function (Application $app) {
-            $repository = new EloquentHistory(new History());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], ['history'], 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('History', EloquentHistory::class);
     }
 }

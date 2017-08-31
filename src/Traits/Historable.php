@@ -4,41 +4,53 @@ namespace TypiCMS\Modules\History\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use TypiCMS\Modules\History\Models\History;
+use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
 trait Historable
 {
     /**
      * boot method.
      *
-     * @return void
+     * @return null
      */
     public static function bootHistorable()
     {
+
         static::created(function (Model $model) {
-            if (!$model->owner) { // don't write history for each translation
-                $model->writeHistory('created', $model->present()->title);
-            }
+            $model->writeHistory('created', $model->present()->title, [], $model->toArray());
         });
+
         static::updated(function (Model $model) {
             $action = 'updated';
-            if (!$model->owner) { // if model has no owner, $model is not a translation
-                $model->writeHistory($action, $model->present()->title);
-            } else { // if model has owner, $model is a translation
-                // When owner is dirty, history will be written for owner model
-                if ($model->owner->getDirty()) {
-                    return;
+
+            $new = [];
+            $old = [];
+            foreach ($model->attributes as $key => $value) {
+                if ($model->translatable and in_array($key, $model->translatable)) {
+                    $values = (array) json_decode($value);
+                    $originalValues = (array) json_decode($model->original[$key]);
+                    foreach ($values as $locale => $newItem) {
+                        if (isset($originalValues[$locale]) && $newItem !== $originalValues[$locale]) {
+                            $new[$key][$locale] = $newItem;
+                            $old[$key][$locale] = $originalValues[$locale];
+                        }
+                    }
+                } else {
+                    $originalValue = $model->original[$key];
+                    if ($value != $originalValue) {
+                        $new[$key] = $value;
+                        $old[$key] = $originalValue;
+                    }
                 }
-                // When item is set online or offline,
-                // getDirty returns only two columns : updated_at and status
-                if (count($model->getDirty()) == 2 && $model->isDirty('status')) {
-                    $action = $model->status ? 'set online' : 'set offline';
-                }
-                $model->owner->writeHistory($action, $model->owner->present()->title, $model->locale);
             }
+
+            $model->writeHistory($action, $model->present()->title, $old, $new);
         });
+
         static::deleted(function (Model $model) {
             $model->writeHistory('deleted', $model->present()->title);
         });
+
     }
 
     /**
@@ -48,20 +60,20 @@ trait Historable
      * @param string $title
      * @param string $locale
      *
-     * @return void
+     * @return null
      */
-    public function writeHistory($action, $title = null, $locale = null)
+    public function writeHistory($action, $title = null, array $old = [], array $new = [])
     {
-        $history = app('TypiCMS\Modules\History\Repositories\HistoryInterface');
         $data['historable_id'] = $this->getKey();
         $data['historable_type'] = get_class($this);
         $data['user_id'] = auth()->id();
         $data['title'] = $title;
-        $data['locale'] = $locale;
         $data['icon_class'] = $this->iconClass($action);
         $data['historable_table'] = $this->getTable();
         $data['action'] = $action;
-        $history->create($data);
+        $data['old'] = $old;
+        $data['new'] = $new;
+        (new EloquentHistory)->create($data);
     }
 
     /**
@@ -86,11 +98,11 @@ trait Historable
                 return 'fa-plus-circle';
                 break;
 
-            case 'set online':
+            case 'published':
                 return 'fa-toggle-on';
                 break;
 
-            case 'set offline':
+            case 'unpublished':
                 return 'fa-toggle-off';
                 break;
 
@@ -105,6 +117,6 @@ trait Historable
      */
     public function history()
     {
-        return $this->morphMany('TypiCMS\Modules\History\Models\History', 'historable');
+        return $this->morphMany(History::class, 'historable');
     }
 }

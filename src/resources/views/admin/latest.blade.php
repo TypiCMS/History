@@ -1,11 +1,11 @@
-<div ng-app="typicms" ng-cloak ng-controller="ListController">
+<div ng-cloak ng-controller="ListController">
 
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2 class="panel-title">@lang('history::global.Latest changes')</h2>
-            @can('destroy-history')
-            <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('history::global.Clear')</button>
+            <h2 class="panel-title">@lang('Latest changes')</h2>
+            @can ('clear-history')
+            <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('Clear')</button>
             @endcan
         </div>
 
@@ -24,7 +24,7 @@
 
                 <tbody>
                     <tr ng-repeat="model in displayedModels">
-                        <td>@{{ model.created_at | dateFromMySQL:'short' }}</td>
+                        <td>@{{ model.created_at | dateFromMySQL:'dd/MM/yyyy HH:mm' }}</td>
                         <td>
                             <a ng-if="model.href" href="@{{ model.href }}?locale=@{{ model.locale }}">@{{ model.title }}</a>
                             <span ng-if="! model.href">@{{ model.title }}</span>

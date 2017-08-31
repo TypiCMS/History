@@ -8,7 +8,7 @@ class CreateHistoryTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return null
      */
     public function up()
     {
@@ -23,6 +23,8 @@ class CreateHistoryTable extends Migration
             $table->string('locale')->nullable();
             $table->string('historable_table');
             $table->string('action');
+            $table->json('old');
+            $table->json('new');
             $table->timestamps();
         });
     }
@@ -30,7 +32,7 @@ class CreateHistoryTable extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return null
      */
     public function down()
     {

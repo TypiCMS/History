@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\History\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -19,18 +20,19 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
+     * @return null
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group(['namespace' => $this->namespace], function (Router $router) {
+        Route::group(['namespace' => $this->namespace], function (Router $router) {
+
             /*
-             * API routes
+             * Admin routes
              */
-            $router->get('api/history', 'ApiController@index')->name('api::index-history');
-            $router->delete('api/history', 'ApiController@destroy')->name('api::destroy-history');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+                $router->get('history', 'AdminController@index')->name('admin::index-history')->middleware('can:see-history');
+                $router->delete('history', 'AdminController@destroy')->name('admin::destroy-history')->middleware('can:clear-history');
+            });
         });
     }
 }

@@ -2,48 +2,31 @@
 
 namespace TypiCMS\Modules\History\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\EloquentRepository;
+use TypiCMS\Modules\History\Models\History;
 
-class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
+class EloquentHistory extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'history';
 
-    /**
-     * Get all models.
-     *
-     * @param array $with Eager load related models
-     * @param bool  $all  Show published or all
-     *
-     * @return Collection|NestedCollection
-     */
-    public function all(array $with = [], $all = false)
-    {
-        $query = $this->make($with);
-
-        // Query ORDER BY
-        $query->order();
-
-        // Get
-        return $query->get();
-    }
+    protected $model = History::class;
 
     /**
      * Get latest models.
      *
-     * @param int   $number number of items to take
-     * @param array $with   array of related items
+     * @param int $number number of items to take
      *
      * @return Collection
      */
-    public function latest($number = 10, array $with = [])
+    public function latest($number = 10)
     {
-        $query = $this->make($with);
-
-        return $query->order()->take($number)->get();
+        return $this->executeCallback(get_called_class(), __FUNCTION__, func_get_args(), function () use ($number) {
+            return $this->prepareQuery($this->createModel())
+                ->order()
+                ->with(['user', 'historable'])
+                ->take($number)
+                ->get();
+        });
     }
 
     /**
@@ -53,6 +36,8 @@ class EloquentHistory extends RepositoriesAbstract implements HistoryInterface
      */
     public function clear()
     {
-        return $this->make()->delete();
+        $deleted = $this->getQuery()->delete();
+        $this->forgetCache();
+        return $deleted;
     }
 }
