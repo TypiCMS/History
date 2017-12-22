@@ -34,7 +34,7 @@
                         <td>
                             <span class="fa fa-fw @{{ model.icon_class }}"></span> @{{ model.action }}
                         </td>
-                        <td>@{{ model.user_name }}</td>
+                        <td class="user_name"><div class="text-truncatable">@{{ model.user_name }}</div></td>
                     </tr>
                 </tbody>
             </table>
