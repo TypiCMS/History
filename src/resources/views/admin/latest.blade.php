@@ -1,9 +1,9 @@
 <div ng-cloak ng-controller="ListController">
 
-    <div class="panel panel-default">
+    <div class="card">
 
-        <div class="panel-heading">
-            <h2 class="panel-title">@lang('Latest changes')</h2>
+        <div class="card-header">
+            @lang('Latest changes')
             @can ('clear-history')
             <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('Clear')</button>
             @endcan
@@ -11,7 +11,7 @@
 
         <div class="table-responsive">
 
-            <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
+            <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main mb-0">
                 <thead>
                     <tr>
                         <th class="created_at">Date</th>
