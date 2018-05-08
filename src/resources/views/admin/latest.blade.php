@@ -11,7 +11,7 @@
 
         <div class="table-responsive">
 
-            <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main mb-0">
+            <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-main mb-0">
                 <thead>
                     <tr>
                         <th class="created_at">Date</th>
