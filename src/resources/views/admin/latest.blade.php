@@ -1,17 +1,17 @@
-<div ng-cloak ng-controller="ListController">
+<template>
 
     <div class="card">
 
         <div class="card-header">
             @lang('Latest changes')
             @can ('clear-history')
-            <button class="btn-clear-history" id="clear-history" ng-click="clearHistory()">@lang('Clear')</button>
+            <button class="btn-clear-history" id="clear-history" @click="clearHistory">@lang('Clear')</button>
             @endcan
         </div>
 
         <div class="table-responsive">
 
-            <table st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-main mb-0">
+            <table v-for="model in displayedModels" class="table table-main mb-0">
                 <thead>
                     <tr>
                         <th class="created_at">Date</th>
@@ -26,13 +26,13 @@
                     <tr ng-repeat="model in displayedModels">
                         <td>@{{ model.created_at | dateFromMySQL:'dd/MM/yyyy HH:mm' }}</td>
                         <td>
-                            <a ng-if="model.href" href="@{{ model.href }}?locale=@{{ model.locale }}">@{{ model.title }}</a>
-                            <span ng-if="! model.href">@{{ model.title }}</span>
-                            <span ng-if="model.locale">(@{{ model.locale }})</span>
+                            <a @if="model.href" :href="model.href+'?locale='+model.locale">@{{ model.title }}</a>
+                            <span @if="!model.href">@{{ model.title }}</span>
+                            <span @if="model.locale">(@{{ model.locale }})</span>
                         </td>
                         <td>@{{ model.historable_table }}</td>
                         <td>
-                            <span class="fa fa-fw @{{ model.icon_class }}"></span> @{{ model.action }}
+                            <span class="fa fa-fw" :class="model.icon_class"></span> @{{ model.action }}
                         </td>
                         <td class="user_name"><div class="text-truncatable">@{{ model.user_name }}</div></td>
                     </tr>
@@ -43,4 +43,4 @@
 
     </div>
 
-</div>
+</template>
