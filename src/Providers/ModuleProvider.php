@@ -19,10 +19,6 @@ class ModuleProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'history');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/history'),
-        ], 'typicms-views');
-
         AliasLoader::getInstance()->alias('History', HistoryFacade::class);
     }
 
