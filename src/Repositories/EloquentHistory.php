@@ -38,6 +38,7 @@ class EloquentHistory extends EloquentRepository
     {
         $deleted = $this->getQuery()->delete();
         $this->forgetCache();
+
         return $deleted;
     }
 }
