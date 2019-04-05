@@ -20,7 +20,7 @@ class EloquentHistory extends EloquentRepository
      */
     public function latest($number = 10)
     {
-        return $this->executeCallback(get_called_class(), __FUNCTION__, func_get_args(), function () use ($number) {
+        return $this->executeCallback(static::class, __FUNCTION__, func_get_args(), function () use ($number) {
             return $this->prepareQuery($this->createModel())
                 ->order()
                 ->with(['user', 'historable'])
