@@ -6,7 +6,6 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\History\Facades\History as HistoryFacade;
 use TypiCMS\Modules\History\Models\History;
-use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -31,6 +30,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('History', EloquentHistory::class);
+        $app->bind('History', History::class);
     }
 }

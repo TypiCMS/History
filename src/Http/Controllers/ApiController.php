@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\History\Models\History;
-use TypiCMS\Modules\History\Repositories\EloquentHistory as Repository;
 
 class ApiController extends BaseApiController
 {
@@ -25,7 +24,7 @@ class ApiController extends BaseApiController
 
     public function destroy()
     {
-        $cleared = $this->repository->clear();
+        $cleared = $this->model->clear();
 
         return response()->json([
             'error' => (bool) !$cleared,
