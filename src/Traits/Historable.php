@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\History\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use TypiCMS\Modules\History\Models\History;
-use TypiCMS\Modules\History\Repositories\EloquentHistory;
 
 trait Historable
 {
