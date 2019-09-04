@@ -2,6 +2,8 @@
 
 namespace TypiCMS\Modules\History\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Presenters\ModulePresenter;
@@ -23,49 +25,35 @@ class History extends Base
         'new' => 'object',
     ];
 
-    /**
-     * lists.
-     */
     public $order = 'id';
+
     public $direction = 'desc';
 
-    /**
-     * History item morph to model.
-     */
-    public function historable()
+    public function historable(): MorphTo
     {
         return $this->morphTo();
     }
 
-    /**
-     * History item belongs to a user.
-     */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Append user name.
-     *
-     * @return string\null
-     */
-    public function getUserNameAttribute()
+    public function getUserNameAttribute(): ?string
     {
         if ($this->user) {
             return $this->user->first_name.' '.$this->user->last_name;
         }
+
+        return null;
     }
 
-    /**
-     * Append href.
-     *
-     * @return string|null
-     */
-    public function getHrefAttribute()
+    public function getHrefAttribute(): ?string
     {
         if ($this->historable) {
             return $this->historable->editUrl();
         }
+
+        return null;
     }
 }

@@ -71,7 +71,7 @@ trait Historable
         $data['action'] = $action;
         $data['old'] = $old;
         $data['new'] = $new;
-        (new EloquentHistory())->create($data);
+        History::create($data);
     }
 
     /**
