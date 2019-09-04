@@ -21,10 +21,10 @@ class ApiController extends BaseApiController
 
     public function destroy(): JsonResponse
     {
-        $cleared = $this->model->clear();
+        $deleted = (new History())->delete();
 
         return response()->json([
-            'error' => (bool) !$cleared,
+            'error' => !$deleted,
         ]);
     }
 }
