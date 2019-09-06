@@ -21,7 +21,7 @@ class ApiController extends BaseApiController
 
     public function destroy(): JsonResponse
     {
-        $deleted = (new History())->delete();
+        $deleted = History::truncate();
 
         return response()->json([
             'error' => !$deleted,
