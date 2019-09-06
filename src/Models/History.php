@@ -18,7 +18,7 @@ class History extends Base
 
     protected $guarded = ['id', 'exit'];
 
-    protected $appends = ['user_name', 'href'];
+    protected $appends = ['href'];
 
     protected $casts = [
         'old' => 'object',
@@ -37,15 +37,6 @@ class History extends Base
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getUserNameAttribute(): ?string
-    {
-        if ($this->user) {
-            return $this->user->first_name.' '.$this->user->last_name;
-        }
-
-        return null;
     }
 
     public function getHrefAttribute(): ?string
