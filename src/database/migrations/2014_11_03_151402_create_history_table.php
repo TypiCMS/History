@@ -13,11 +13,10 @@ class CreateHistoryTable extends Migration
     public function up()
     {
         Schema::create('history', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('historable_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->unsignedInteger('historable_id');
             $table->string('historable_type');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title')->nullable();
             $table->string('icon_class')->nullable();
             $table->string('locale')->nullable();
