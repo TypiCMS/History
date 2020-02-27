@@ -14,6 +14,7 @@ class History extends Base
     use PresentableTrait;
 
     protected $table = 'history';
+
     protected $presenter = ModulePresenter::class;
 
     protected $guarded = ['id', 'exit'];
