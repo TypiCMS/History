@@ -10,8 +10,6 @@ trait Historable
 {
     /**
      * boot method.
-     *
-     * @return null
      */
     public static function bootHistorable()
     {
@@ -57,8 +55,6 @@ trait Historable
      * @param string $action
      * @param string $title
      * @param string $locale
-     *
-     * @return null
      */
     public function writeHistory($action, $title = null, array $old = [], array $new = [])
     {
@@ -86,26 +82,32 @@ trait Historable
         switch ($action) {
             case 'deleted':
                 return 'fa-trash';
+
                 break;
 
             case 'updated':
                 return 'fa-edit';
+
                 break;
 
             case 'created':
                 return 'fa-plus-circle';
+
                 break;
 
             case 'published':
                 return 'fa-toggle-on';
+
                 break;
 
             case 'unpublished':
                 return 'fa-toggle-off';
+
                 break;
 
             default:
                 return;
+
                 break;
         }
     }
