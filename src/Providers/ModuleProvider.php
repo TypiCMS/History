@@ -13,7 +13,6 @@ class ModuleProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.history');
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'history');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         AliasLoader::getInstance()->alias('History', HistoryFacade::class);
