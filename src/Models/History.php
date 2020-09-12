@@ -17,7 +17,7 @@ class History extends Base
 
     protected $presenter = ModulePresenter::class;
 
-    protected $guarded = ['id', 'exit'];
+    protected $guarded = [];
 
     protected $appends = ['href'];
 
