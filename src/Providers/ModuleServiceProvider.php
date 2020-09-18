@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\History\Facades\History as HistoryFacade;
 use TypiCMS\Modules\History\Models\History;
 
-class ModuleProvider extends ServiceProvider
+class ModuleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
