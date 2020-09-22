@@ -63,54 +63,11 @@ trait Historable
             'historable_type' => get_class($this),
             'user_id' => auth()->id(),
             'title' => $title,
-            'icon_class' => $this->iconClass($action),
             'historable_table' => $this->getTable(),
             'action' => $action,
             'old' => $old,
             'new' => $new,
         ]);
-    }
-
-    /**
-     * Return icon class for each action.
-     *
-     * @param string $action
-     *
-     * @return string|null
-     */
-    private function iconClass($action = null)
-    {
-        switch ($action) {
-            case 'deleted':
-                return 'fa-trash';
-
-                break;
-
-            case 'updated':
-                return 'fa-edit';
-
-                break;
-
-            case 'created':
-                return 'fa-plus-circle';
-
-                break;
-
-            case 'published':
-                return 'fa-toggle-on';
-
-                break;
-
-            case 'unpublished':
-                return 'fa-toggle-off';
-
-                break;
-
-            default:
-                return;
-
-                break;
-        }
     }
 
     /**

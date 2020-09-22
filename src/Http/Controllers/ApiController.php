@@ -22,7 +22,6 @@ class ApiController extends BaseApiController
                 'history.created_at',
                 'history.title',
                 'history.locale',
-                'history.icon_class',
                 'history.historable_id',
                 'history.historable_type',
                 'history.action',
