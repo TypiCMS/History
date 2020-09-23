@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\History\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -45,12 +44,8 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    public function destroy(): JsonResponse
+    public function destroy()
     {
-        $deleted = History::truncate();
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
+        History::truncate();
     }
 }
