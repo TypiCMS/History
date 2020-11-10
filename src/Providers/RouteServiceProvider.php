@@ -16,7 +16,7 @@ class RouteServiceProvider extends ServiceProvider
          */
         Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
             $router->get('history', [ApiController::class, 'index'])->middleware('can:see history');
-            $router->delete('history', [ApiController::class, 'destroy'])->middleware('can:clear-history');
+            $router->delete('history', [ApiController::class, 'destroy'])->middleware('can:clear history');
         });
     }
 }
