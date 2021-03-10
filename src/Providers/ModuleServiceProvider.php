@@ -14,7 +14,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.history');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_history_table.php.stub' => getMigrationFileName('create_history_table'),
+            __DIR__.'/../../database/migrations/create_history_table.php.stub' => getMigrationFileName('create_history_table'),
         ], 'migrations');
 
         AliasLoader::getInstance()->alias('History', HistoryFacade::class);
