@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\History\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Str;
 use TypiCMS\Modules\History\Models\History;
 
@@ -51,12 +52,8 @@ trait Historable
 
     /**
      * Write History row.
-     *
-     * @param string $action
-     * @param string $title
-     * @param string $locale
      */
-    public function writeHistory($action, $title = null, array $old = [], array $new = [])
+    public function writeHistory(string $action, ?string $title = null, array $old = [], array $new = [])
     {
         History::create([
             'historable_id' => $this->getKey(),
@@ -73,7 +70,7 @@ trait Historable
     /**
      * Model has history.
      */
-    public function history()
+    public function history(): MorphMany
     {
         return $this->morphMany(History::class, 'historable');
     }
