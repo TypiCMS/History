@@ -9,7 +9,7 @@ use TypiCMS\Modules\History\Http\Controllers\ApiController;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public function map()
+    public function map(): void
     {
         /*
          * API routes

@@ -9,7 +9,7 @@ use TypiCMS\Modules\History\Models\History;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.history');
 
@@ -20,15 +20,10 @@ class ModuleServiceProvider extends ServiceProvider
         AliasLoader::getInstance()->alias('History', HistoryFacade::class);
     }
 
-    public function register()
+    public function register(): void
     {
-        $app = $this->app;
+        $this->app->register(RouteServiceProvider::class);
 
-        /*
-         * Register route service provider
-         */
-        $app->register(RouteServiceProvider::class);
-
-        $app->bind('History', History::class);
+        $this->app->bind('History', History::class);
     }
 }
